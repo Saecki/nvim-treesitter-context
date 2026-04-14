@@ -1,4 +1,11 @@
 (procedure) @context
+
 (while) @context
-(conditional) @context
+
+(if) @context
+
+(else) @context
+
+(elseif) @context
+
 (command) @context

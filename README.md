@@ -22,7 +22,6 @@ Note: support for specific languages is strictly community maintained and can br
 <details>
 <summary>Supported (click to expand)</summary
 
-  - [x] `org`
   - [x] `ada`
   - [x] `apex`
   - [x] `bash`
@@ -61,6 +60,7 @@ Note: support for specific languages is strictly community maintained and can br
   - [x] `jsonnet`
   - [x] `julia`
   - [x] `kdl`
+  - [x] `kotlin`
   - [x] `latex`
   - [x] `liquidsoap`
   - [x] `lua`
@@ -69,7 +69,6 @@ Note: support for specific languages is strictly community maintained and can br
   - [x] `matlab`
   - [x] `nim`
   - [x] `nix`
-  - [x] `norg`
   - [x] `nu`
   - [x] `objdump`
   - [x] `ocaml`
@@ -90,6 +89,7 @@ Note: support for specific languages is strictly community maintained and can br
   - [x] `starlark`
   - [x] `svelte`
   - [x] `swift`
+  - [x] `systemverilog`
   - [x] `tact`
   - [x] `tcl`
   - [x] `teal`
@@ -101,7 +101,6 @@ Note: support for specific languages is strictly community maintained and can br
   - [x] `typoscript`
   - [x] `typst`
   - [x] `usd`
-  - [x] `verilog`
   - [x] `vhdl`
   - [x] `vim`
   - [x] `vue`
@@ -127,8 +126,12 @@ Note: support for specific languages is strictly community maintained and can br
   - [ ] `bibtex`
   - [ ] `bicep`
   - [ ] `bitbake`
+  - [ ] `blade`
   - [ ] `blueprint`
   - [ ] `bp`
+  - [ ] `brightscript`
+  - [ ] `c3`
+  - [ ] `caddy`
   - [ ] `cairo`
   - [ ] `chatito`
   - [ ] `circom`
@@ -149,6 +152,7 @@ Note: support for specific languages is strictly community maintained and can br
   - [ ] `dtd`
   - [ ] `earthfile`
   - [ ] `ebnf`
+  - [ ] `ecma`
   - [ ] `editorconfig`
   - [ ] `eds`
   - [ ] `eex`
@@ -187,6 +191,7 @@ Note: support for specific languages is strictly community maintained and can br
   - [ ] `gowork`
   - [ ] `gpg`
   - [ ] `gren`
+  - [ ] `groq`
   - [ ] `gstlaunch`
   - [ ] `hack`
   - [ ] `hare`
@@ -199,6 +204,7 @@ Note: support for specific languages is strictly community maintained and can br
   - [ ] `hlsplaylist`
   - [ ] `hocon`
   - [ ] `hoon`
+  - [ ] `html_tags`
   - [ ] `htmldjango`
   - [ ] `http`
   - [ ] `hurl`
@@ -208,15 +214,18 @@ Note: support for specific languages is strictly community maintained and can br
   - [ ] `inko`
   - [ ] `ipkg`
   - [ ] `ispc`
+  - [ ] `javadoc`
   - [ ] `jinja`
   - [ ] `jinja_inline`
   - [ ] `jq`
   - [ ] `jsdoc`
   - [ ] `json5`
   - [ ] `jsonc`
+  - [ ] `jsx`
   - [ ] `just`
+  - [ ] `kcl`
   - [ ] `kconfig`
-  - [ ] `kotlin`
+  - [ ] `kitty`
   - [ ] `koto`
   - [ ] `kusto`
   - [ ] `lalrpop`
@@ -249,6 +258,7 @@ Note: support for specific languages is strictly community maintained and can br
   - [ ] `perl`
   - [ ] `phpdoc`
   - [ ] `pioasm`
+  - [ ] `pkl`
   - [ ] `po`
   - [ ] `pod`
   - [ ] `poe_filter`
@@ -280,6 +290,7 @@ Note: support for specific languages is strictly community maintained and can br
   - [ ] `rego`
   - [ ] `requirements`
   - [ ] `rescript`
+  - [ ] `rifleconf`
   - [ ] `rnoweb`
   - [ ] `robot`
   - [ ] `robots`
@@ -295,10 +306,12 @@ Note: support for specific languages is strictly community maintained and can br
   - [ ] `slint`
   - [ ] `smithy`
   - [ ] `snakemake`
+  - [ ] `snl`
   - [ ] `soql`
   - [ ] `sosl`
   - [ ] `sourcepawn`
   - [ ] `sparql`
+  - [ ] `sproto`
   - [ ] `sql`
   - [ ] `squirrel`
   - [ ] `ssh_config`
@@ -312,6 +325,7 @@ Note: support for specific languages is strictly community maintained and can br
   - [ ] `systemtap`
   - [ ] `t32`
   - [ ] `tablegen`
+  - [ ] `tera`
   - [ ] `textproto`
   - [ ] `thrift`
   - [ ] `tiger`
@@ -329,6 +343,7 @@ Note: support for specific languages is strictly community maintained and can br
   - [ ] `v`
   - [ ] `vala`
   - [ ] `vento`
+  - [ ] `verilog`
   - [ ] `vhs`
   - [ ] `vimdoc`
   - [ ] `vrl`
@@ -336,12 +351,14 @@ Note: support for specific languages is strictly community maintained and can br
   - [ ] `wgsl_bevy`
   - [ ] `wing`
   - [ ] `wit`
+  - [ ] `wxml`
   - [ ] `xcompose`
   - [ ] `xresources`
   - [ ] `yuck`
   - [ ] `zathurarc`
   - [ ] `ziggy`
   - [ ] `ziggy_schema`
+  - [ ] `zsh`
 
 </details>
 
@@ -385,7 +402,7 @@ require'treesitter-context'.setup{
 
 ## Commands
 
-`TSContextEnable`, `TSContextDisable` and `TSContextToggle`.
+`TSContext` with subcommands `enable`, `disable` and `toggle`.
 
 ## Appearance
 

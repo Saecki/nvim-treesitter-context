@@ -1,108 +1,121 @@
 ; standard if
 (if_expression
-  consequence: (_ (_) @context.end)
-) @context.conditional
+  consequence: (_
+    (_) @context.end)) @context.conditional
 
 ; standard else
 (else_clause
-  (block (_)) @context.end
-) @context.conditional
+  (block
+    (_)) @context.end) @context.conditional
 
 ; let if  (its else is caught above)
 (let_declaration
-   (if_expression
-     (block (_))) @context.end
-) @context
+  (if_expression
+    (block
+      (_))) @context.end) @context.conditional
 
 ; let else
 (let_declaration
-  alternative: (block (_) @context.end)
-) @context
+  alternative: (block
+    (_) @context.end)) @context.conditional
 
 ; let (tuple) = (values)
 (let_declaration
-  (tuple_pattern (_))
-  (tuple_expression _) @context.end
-) @context
+  (tuple_pattern
+    (_))
+  (tuple_expression
+    _) @context.end) @context
 
 ; helps with long array definitions
 (let_declaration
-   (array_expression _) @context.end
-) @context
+  (array_expression
+    _) @context.end) @context
 
 (match_expression
-  body: (_ (_) @context.end)
-) @context.conditional
+  body: (_
+    (_) @context.end)) @context.conditional
 
 (match_arm
-  (block (_) @context.end)
-) @context.conditional
+  (block
+    (_) @context.end)) @context.conditional
 
 (for_expression
-  body: (_ (_) @context.end)
-) @context.loop
+  body: (_
+    (_) @context.end)) @context.loop
 
 (while_expression
-  body: (_ (_) @context.end)
-) @context.loop
+  body: (_
+    (_) @context.end)) @context.loop
 
 (loop_expression
-  body: (_ (_) @context.end)
-) @context.loop
+  body: (_
+    (_) @context.end)) @context.loop
 
 (closure_expression
-  body: (_ (_) @context.end)
-) @context.closure
+  body: (_
+    (_) @context.end)) @context.closure
 
 (function_item
-  body: (_ (_) @context.end)
-) @context.function
+  body: (_
+    (_) @context.end)) @context.function
 
 (impl_item
-  body: (_ (_) @context.end)
-) @context.type
+  body: (_
+    (_) @context.end)) @context.type
 
 (trait_item
-  body: (_ (_) @context.end)
-) @context.type
+  body: (_
+    (_) @context.end)) @context.type
 
 (struct_item
-  body: (_ (_) @context.end)
-) @context.type
+  body: (_
+    (_) @context.end)) @context.type
 
 (struct_expression
-  (type_identifier) @context.end
-) @context
+  (type_identifier) @context.end) @context
 
 (union_item
-  body: (_ (_) @context.end)
-) @context
+  body: (_
+    (_) @context.end)) @context.type
 
 (enum_item
-  body: (_ (_) @context.end)
-) @context.type
+  body: (_
+    (_) @context.end)) @context.type
 
 (mod_item
-  body: (_ (_) @context.end)
-) @context.namespace
+  body: (_
+    (_) @context.end)) @context.namespace
 
 ; extern
 (foreign_mod_item
-  body: (_ (_) @context.end)
-) @context.namespace
+  body: (_
+    (_) @context.end)) @context.namespace
 
 (async_block
-  (block (_) @context.end)
-) @context
+  (block
+    (_) @context.end)) @context.block
 
 (try_block
-  (block (_) @context.end)
-) @context
+  (block
+    (_) @context.end)) @context.block
 
 (unsafe_block
-  (block (_) @context.end)
-) @context
+  (block
+    (_) @context.end)) @context.block
+
+; function call site; helps with long parameter lists
+(call_expression
+  (arguments
+    (_) @context.end)) @context
+
+(macro_invocation
+  (token_tree
+    (_) @context.end)) @context
 
 (macro_definition
-  name: (_) @context.end
-) @context
+  name: (_) @context.end) @context.function
+
+; let = {}
+(let_declaration
+  value: (block
+    (_) @context.end)) @context

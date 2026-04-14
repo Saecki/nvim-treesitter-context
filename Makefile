@@ -6,7 +6,7 @@ export XDG_DATA_HOME ?= $(HOME)/.data
 # nvim-treesitter
 # ------------------------------------------------------------------------------
 
-NVIM_TS_SHA ?= 2cade9e
+NVIM_TS_SHA ?= d72fa25
 NVIM_TS := deps/nvim-treesitter
 
 .PHONY: nvim-treesitter
@@ -24,8 +24,8 @@ $(NVIM_TS):
 
 FILTER=.*
 
-export NVIM_TEST_VERSION ?= v0.10.2
-export NVIM_RUNNER_VERSION ?= v0.10.2
+export NVIM_TEST_VERSION ?= v0.11.5
+export NVIM_RUNNER_VERSION ?= v0.11.5
 
 NVIM_TEST := deps/nvim-test
 NVIM_TEST_REV = v1.1.0
@@ -52,10 +52,7 @@ test: $(NVIM_TEST) $(NVIM_TS)
 .PHONY: parsers
 parsers: $(NVIM_TEST) $(NVIM_TS)
 	$(XDG_DATA_HOME)/nvim-test/nvim-runner-$(NVIM_RUNNER_VERSION)/bin/nvim \
-		--clean -u NONE -c 'source install_parsers.lua'
-
-lint:
-	luacheck lua
+		-l test/helpers.lua install
 
 # ------------------------------------------------------------------------------
 # LuaLS
@@ -101,7 +98,7 @@ endif
 # Stylua
 # ------------------------------------------------------------------------------
 
-STYLUA_VERSION := v2.0.2
+STYLUA_VERSION := v2.1.0
 STYLUA_ZIP := stylua-$(STYLUA_PLATFORM).zip
 STYLUA_URL := https://github.com/JohnnyMorganz/StyLua/releases/download/$(STYLUA_VERSION)/$(STYLUA_ZIP)
 STYLUA := deps/stylua
@@ -129,4 +126,40 @@ stylua-check: $(STYLUA)
 .PHONY: stylua-run
 stylua-run: $(STYLUA)
 	$(STYLUA) $(LUA_FILES)
-	sed -i -r 's/---@/--- @/g' $(LUA_FILES)
+	perl -pi -e 's/---@/--- @/g' $(LUA_FILES)
+
+# ------------------------------------------------------------------------------
+# Tsqueryls
+# ------------------------------------------------------------------------------
+ifeq ($(shell uname -s),Darwin)
+    TSQUERYLS_PLATFORM := aarch64-apple-darwin
+else
+    TSQUERYLS_PLATFORM := x86_64-unknown-linux-gnu
+endif
+
+TSQUERYLS := deps/ts_query_ls-$(TSQUERYLS_PLATFORM)
+TSQUERYLS_TARBALL := $(TSQUERYLS).tar.gz
+TSQUERYLS_URL := https://github.com/ribru17/ts_query_ls/releases/latest/download/$(notdir $(TSQUERYLS_TARBALL))
+
+.PHONY: tsqueryls
+tsqueryls: $(TSQUERYLS)
+
+$(TSQUERYLS):
+	wget --directory-prefix=$(dir $@) $(TSQUERYLS_URL)
+	mkdir -p $@
+	tar -xf $(TSQUERYLS_TARBALL) -C $@
+	rm -rf $(TSQUERYLS_TARBALL)
+
+QUERIES := queries/
+
+.PHONY: tsqueryls-lint
+tsqueryls-lint: $(TSQUERYLS)
+	$(TSQUERYLS)/ts_query_ls lint $(QUERIES)
+
+.PHONY: tsqueryls-format
+tsqueryls-format: $(TSQUERYLS)
+	$(TSQUERYLS)/ts_query_ls format $(QUERIES)
+
+.PHONY: tsqueryls-check
+tsqueryls-check: $(TSQUERYLS)
+	$(TSQUERYLS)/ts_query_ls check $(QUERIES)
